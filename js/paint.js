@@ -21,6 +21,12 @@ function draw(){
     canvas.addEventListener('mouseoutput', stop);
 }
 
+function erase(){
+    canvas.addEventListener('mousedown', start,false);
+    canvas.addEventListener('mousemove', erasing);
+    canvas.addEventListener('mouseup', stop);
+    canvas.addEventListener('mouseoutput', stop);
+}
 /**
  * marks the place on the canvas where it is clicked
  */
@@ -37,7 +43,19 @@ function drawing(e){
     if(isDrawing){
         ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
         ctx.strokeStyle = color;//pick color
-        ctx.lineWidth = gross;//pick width
+        ctx.lineWidth = gross * 5;//pick width
+        ctx.lineCap = "round";//makes the termination of the round line
+        ctx.lineJoin = "round";//determines the shape used to join two line segments
+        ctx.stroke();
+    }
+}
+
+function erasing(e){
+    if(isDrawing){
+        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        ctx.strokeStyle = "white"
+        color = 'white';
+        ctx.lineWidth = gross * 5;//pick width
         ctx.lineCap = "round";//makes the termination of the round line
         ctx.lineJoin = "round";//determines the shape used to join two line segments
         ctx.stroke();
