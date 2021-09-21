@@ -9,15 +9,19 @@
     <title>Pseudo-Paint</title>
 </head>
 <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="canvas" width="800" height="500"></canvas>
     <button id="pencil"><i class='bx bxs-pencil'></i></button>
     <button id="rubber"><i class='bx bxs-eraser'></i></button>
     <!--I change text for icons-->
     <input type="color" id="color" onInput="color = this.value">
-    <input type="range" id="gross" min="1" max="10" value="5" onInput="gross = this.value">
+    <input type="range" id="gross" min="1" max="10" value="3" onInput="gross = this.value">
     <!--we have to ask if the onInput is bad practice-->
     <input type="file" name="img" id="myImg"  accept="image/*">
-    <button id="clean">Limpiar</button>
+    <button id="btnClean">Limpiar</button>
+    <a id="imgDwl" download="image.png" href="">
+        <button id="btnDwnl">Descargar</button> </a>
+        <button id="btnReloadImg">Recargar Imagen</button>
+        <button id="btnBright">Brillo</button>
     <script src="js/paint.js"></script>
 </body>
 </html>
