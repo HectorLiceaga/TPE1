@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'><!--this is for use icons like fonts-->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!--this is for use icons like fonts-->
     <title>Pseudo-Paint</title>
 </head>
+
 <body>
-    <canvas id="canvas" width="800" height="500"></canvas>
     <button id="pencil"><i class='bx bxs-pencil'></i></button>
     <button id="rubber"><i class='bx bxs-eraser'></i></button>
     <!--I change text for icons-->
     <input type="color" id="color" onInput="color = this.value">
     <input type="range" id="gross" min="1" max="10" value="3" onInput="gross = this.value">
     <!--we have to ask if the onInput is bad practice-->
-    <input type="file" name="img" id="myImg"  accept="image/*">
+    <input type="file" name="img" id="myImg" accept="image/*">
     <button id="btnClean">Limpiar</button>
     <a id="imgDwl" download="image.png" href="">
-        <button id="btnDwnl">Descargar</button> </a>
-        <button id="btnReloadImg">Recargar Imagen</button>
-        <button id="btnBright">Brillo</button>
+        <button id="btnDwnl">Descargar</button>
+    </a>
+    <button id="btnReloadImg">Recargar Imagen</button>
+    <button id="sepia">Sepia</button>
+    <button id="negative">Negativo</button>
+    <button id="btnBright">Brillo</button>
+    <button id="sobel">Sobel</button>
+    <canvas id="canvas" width="800" height="500"></canvas>
     <script src="js/paint.js"></script>
 </body>
+
 </html>

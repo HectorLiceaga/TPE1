@@ -12,8 +12,8 @@ let tool = '';
 /**
  * start with the drawing
  */
- let pencil = document.getElementById("pencil");
- pencil.addEventListener("click", draw);
+let pencil = document.getElementById("pencil");
+pencil.addEventListener("click", draw);
 
 function draw() {
     tool = 'pencil';
@@ -26,8 +26,8 @@ function draw() {
 /**
  *                      ***************Mouse's movement capture**************
  */
- let rubber = document.getElementById("rubber")
- rubber.addEventListener("click", erase);
+let rubber = document.getElementById("rubber");
+rubber.addEventListener("click", erase);
 
 function erase() {
     tool = 'rubber';
@@ -160,8 +160,8 @@ function setPixel(imageData, x, y, r, g, b, a) {
 /**
  *                           **********Download canvas as an image***************
  */
- let dwnl = document.getElementById("btnDwnl");
- dwnl.addEventListener("click", download);
+let dwnl = document.getElementById("btnDwnl");
+dwnl.addEventListener("click", download);
 
 function download() {
     let data = canvas.toDataURL('image/png');
@@ -172,9 +172,9 @@ function download() {
 /**
  *                           **********Brightness***************
  */
- let btnBright = document.getElementById("btnBright");
+let btnBright = document.getElementById("btnBright");
 
- btnBright.addEventListener("click", () => {
+btnBright.addEventListener("click", () => {
     let bright = 10;
     let imageData = ctx.getImageData(0, 0, w, h);
     for (let x = 0; x < w; x++) {
@@ -186,22 +186,95 @@ function download() {
         }
     }
     ctx.putImageData(imageData, 0, 0);
- });
+});
 
 /**
  *                           **********Set of 3 functions to get the color***************
  */
-  function getRed(image, x, y) {
+function getRed(image, x, y) {
     let index = (x + y * image.width) * 4;
     return image.data[index];
-  }
- 
-  function getGreen(image, x, y) {
+}
+
+function getGreen(image, x, y) {
     let index = (x + y * image.width) * 4;
     return image.data[index + 1];
-  }
+}
 
-  function getBlue(image, x, y) {
+function getBlue(image, x, y) {
     let index = (x + y * image.width) * 4;
     return image.data[index + 2];
-  }
+}
+
+/**
+ *                           **********Sepia***************
+ */
+document.getElementById('sepia').addEventListener('click',sepia);
+
+function sepia(){
+	let imageData = ctx.getImageData(0, 0, w, h);
+    let data = imageData.data;
+	for (let i = 0; i < data.length; i += 4) {
+		let r = data[i], g = data[i + 1], b = data[i + 2];
+
+		data[i] = Math.min(Math.round(0.393 * r + 0.769 * g + 0.189 * b), 255);
+		data[i + 1] = Math.min(Math.round(0.349 * r + 0.686 * g + 0.168 * b), 255);
+		data[i + 2] = Math.min(Math.round(0.272 * r + 0.534 * g + 0.131 * b), 255);
+	}
+	ctx.putImageData(imageData, 0, 0);
+}
+
+/**
+ *                           **********Negative***************
+ */
+document.getElementById('negative').addEventListener('click',negative);
+
+function negative(){
+	let imageData = ctx.getImageData(0, 0, w, h);
+	let data = imageData.data;
+	for (let i = 0; i < data.length; i += 4) {
+		data[i]     = 255 - data[i];     
+		data[i + 1] = 255 - data[i + 1]; 
+		data[i + 2] = 255 - data[i + 2];
+	}
+	ctx.putImageData(imageData, 0, 0);
+}
+
+/**
+ *                           **********Sobel***************
+ */
+document.getElementById('sobel').addEventListener('click',sobel);
+let data;
+
+function sobel(){
+    data=ctx.getImageData(0,0,w,h)
+    let data2=ctx.getImageData(0,0,w,h)
+    for (let i = 0; i < data.data.length; i += 4) {
+        let row=parseInt(i/4/w)
+        let col=parseInt(i/4%w)
+        if(row>0&&row<h){
+            if(col>0&&col<w){
+                let gx=avg(i-w*4-4)+2*avg(i-4)+avg(i+4*w-4)-avg(i-w*4+4)-2*avg(i-4)-avg(i+4*w+4);
+                let gy=avg(i-w*4-4)+2*avg(i-w*4)+avg(i+4*w+4)-avg(i+w*4-4)-2*avg(i+w*4)-avg(i+4*w+4);
+                let g=Math.sqrt(Math.pow(gx,2)+Math.pow(gy,2))
+                if(g>20){
+                    data2.data[i]=(255-g);
+                    data2.data[i+1]=(255-g);
+                    data2.data[i+2]=(255-g);
+                }else{
+                    data2.data[i]=255
+                    data2.data[i+1]=255
+                    data2.data[i+2]=255
+                }
+            }
+        }
+    }
+    ctx.putImageData(data2, 0, 0);
+}
+function avg(index){
+    let a=0
+    for(let i=index;i<index+3;++i){
+        a+=data.data[i]
+    }
+    return a/3
+}
