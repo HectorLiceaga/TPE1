@@ -309,7 +309,7 @@ function toBinary() {
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         let pixel = (data[i] + data[i + 1] + data[i + 2]) / 3;
-        if (pixel <= 127) {
+        if (pixel < 127) {
             pixel = 0;
         } else {
             pixel = 255;
@@ -330,7 +330,7 @@ btnBlur.addEventListener('click', blur);
 function blur() {
     imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let r, g, b;
-    for (let x = 1; x < canvas.width - 1; x++) {
+    for (let x = 0; x < canvas.width; x++) {
         for (let y = 1; y < canvas.height - 1; y++) {
             r = Math.floor((getRed(imageData, x, y) + getRed(imageData, x - 1, y) + getRed(imageData, x + 1, y) + getRed(imageData, x - 1, y + 1) + getRed(imageData, x - 1, y - 1) + getRed(imageData, x, y + 1) + getRed(imageData, x, y - 1) + getRed(imageData, x + 1, y + 1) + getRed(imageData, x + 1, y - 1)) / 9);
             g = Math.floor((getGreen(imageData, x, y) + getGreen(imageData, x - 1, y) + getGreen(imageData, x + 1, y) + getGreen(imageData, x - 1, y + 1) + getGreen(imageData, x - 1, y - 1) + getGreen(imageData, x, y + 1) + getGreen(imageData, x, y - 1) + getGreen(imageData, x + 1, y + 1) + getGreen(imageData, x + 1, y - 1)) / 9);
@@ -343,7 +343,7 @@ function blur() {
 }
 
 /**
- *                           **********Blur filter***************
+ *                           **********Saturation filter***************
  */
 document.getElementById('saturation').addEventListener('click', saturation);
 

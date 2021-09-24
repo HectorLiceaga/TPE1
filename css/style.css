@@ -1,3 +1,78 @@
+ /*
+ *   Me faltan acomodar los inputs, btn dowload centrado
+ */
+ 
+ 
+*, ::before, ::after {                                             
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6F6F6;
+    margin: 0;
+  }
+
 canvas {
     border: 1px black solid;
+    background-color: #F6F6F6;
 }
+
+.tools {
+    margin-top: 20px;
+    margin-bottom: 10px;   
+    display: flex;
+    flex-flow: row wrap; 
+    justify-content: center;
+}
+
+
+.filters {
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+button {
+    border-radius: 12px;
+    padding: 5px 10px;
+    box-shadow: 0 5px #999;
+    border: none;
+    text-align: center;
+    outline: none;
+    color: #000000;
+    background-color: #c5c5c5;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #bdbdbd;
+    text-decoration: double;
+}
+
+
+button:active {
+    background-color: #bdbdbd;
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+  }
+
+  a {
+      text-decoration: none;
+  }
+
+  #btnDwnl {
+    display: block;
+    width: 90%;
+    margin-top: 5px;
+  }
+
+  .canvas {
+    display: flex;
+    justify-content: center;
+  }
+

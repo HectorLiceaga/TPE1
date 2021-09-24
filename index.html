@@ -12,28 +12,34 @@
 </head>
 
 <body>
-    <button id="pencil"><i class='bx bxs-pencil'></i></button>
-    <button id="rubber"><i class='bx bxs-eraser'></i></button>
-    <!--I change text for icons-->
-    <input type="color" id="color" onInput="color = this.value">
-    <input type="range" id="gross" min="1" max="10" value="3" onInput="gross = this.value">
-    <!--we have to ask if the onInput is bad practice-->
-    <input type="file" name="img" id="myImg" accept="image/*">
-    <button id="btnClean">Limpiar</button>
-    <a id="imgDwl" download="image.png" href="">
-        <button id="btnDwnl">Descargar</button>
-    </a>
-    <button id="btnReloadImg">Recargar Imagen</button>
-    <button id="sepia">Sepia</button>
-    <button id="negative">Negativo</button>
-    <button id="btnBright">Brillo</button>
-    <button id="sobel">Sobel</button>
-    <button id="gray">Escala de Grises</button>
-    <button id="binary">Binarización</button>
-    <button id="blur">Blur</button>
-    <button id="saturation">Saturación</button>
-
-    <canvas id="canvas" width="800" height="500"></canvas>
+    <div class="tools">
+        <button id="pencil"><i class='bx bxs-pencil'></i></button>
+        <button id="rubber"><i class='bx bxs-eraser'></i></button>
+        <!--I change text for icons-->
+        <input type="color" id="color" onInput="color = this.value">
+        <input type="range" id="gross" min="1" max="10" value="3" onInput="gross = this.value">
+        <input type="file" name="img" id="myImg" accept="image/*">
+        <button id="btnClean">Limpiar</button>
+        <button id="btnReloadImg">Recargar Imagen</button>
+    </div>
+    <div class="filters">
+        <button id="sepia">Sepia</button>
+        <button id="negative">Negativo</button>
+        <button id="btnBright">Brillo</button>
+        <button id="sobel">Sobel</button>
+        <button id="gray">Escala de Grises</button>
+        <button id="binary">Binarización</button>
+        <button id="blur">Blur</button>
+        <button id="saturation">Saturación</button>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas" width="800" height="500"></canvas>
+    </div>
+    <div class="dwnl">
+        <a id="imgDwl" download="image.png" href="">
+            <button id="btnDwnl">Descargar</button>
+        </a>
+    </div>
     <script src="js/paint.js"></script>
 </body>
 
