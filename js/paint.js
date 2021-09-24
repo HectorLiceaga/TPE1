@@ -176,9 +176,9 @@ let btnBright = document.getElementById("btnBright");
 
 btnBright.addEventListener("click", () => {
     let bright = 10;
-    let imageData = ctx.getImageData(0, 0, w, h);
-    for (let x = 0; x < w; x++) {
-        for (let y = 0; y < h; y++) {
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    for (let x = 0; x < canvas.width; x++) {
+        for (let y = 0; y < canvas.height; y++) {
             let r = getRed(imageData, x, y) + bright;
             let g = getGreen(imageData, x, y) + bright;
             let b = getBlue(imageData, x, y) + bright;
@@ -212,7 +212,7 @@ function getBlue(image, x, y) {
 document.getElementById('sepia').addEventListener('click', sepia);
 
 function sepia() {
-    let imageData = ctx.getImageData(0, 0, w, h);
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         let r = data[i], g = data[i + 1], b = data[i + 2];
@@ -230,7 +230,7 @@ function sepia() {
 document.getElementById('negative').addEventListener('click', negative);
 
 function negative() {
-    let imageData = ctx.getImageData(0, 0, w, h);
+    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         data[i] = 255 - data[i];
@@ -247,6 +247,8 @@ document.getElementById('sobel').addEventListener('click', sobel);
 let data;
 
 function sobel() {
+    let w = canvas.width;
+    let h = canvas.height;
     data = ctx.getImageData(0, 0, w, h)
     let data2 = ctx.getImageData(0, 0, w, h)
     for (let i = 0; i < data.data.length; i += 4) {
@@ -331,7 +333,7 @@ function blur() {
     imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let r, g, b;
     for (let x = 0; x < canvas.width; x++) {
-        for (let y = 1; y < canvas.height - 1; y++) {
+        for (let y = 0; y < canvas.height; y++) {
             r = Math.floor((getRed(imageData, x, y) + getRed(imageData, x - 1, y) + getRed(imageData, x + 1, y) + getRed(imageData, x - 1, y + 1) + getRed(imageData, x - 1, y - 1) + getRed(imageData, x, y + 1) + getRed(imageData, x, y - 1) + getRed(imageData, x + 1, y + 1) + getRed(imageData, x + 1, y - 1)) / 9);
             g = Math.floor((getGreen(imageData, x, y) + getGreen(imageData, x - 1, y) + getGreen(imageData, x + 1, y) + getGreen(imageData, x - 1, y + 1) + getGreen(imageData, x - 1, y - 1) + getGreen(imageData, x, y + 1) + getGreen(imageData, x, y - 1) + getGreen(imageData, x + 1, y + 1) + getGreen(imageData, x + 1, y - 1)) / 9);
             b = Math.floor((getBlue(imageData, x, y) + getBlue(imageData, x - 1, y) + getBlue(imageData, x + 1, y) + getBlue(imageData, x - 1, y + 1) + getBlue(imageData, x - 1, y - 1) + getBlue(imageData, x, y + 1) + getBlue(imageData, x, y - 1) + getBlue(imageData, x + 1, y + 1) + getBlue(imageData, x + 1, y - 1)) / 9);
